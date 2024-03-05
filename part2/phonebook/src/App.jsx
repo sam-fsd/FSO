@@ -3,6 +3,10 @@ import { Persons } from './components/Persons';
 import { Filter } from './components/Filter';
 import { Form } from './components/Form';
 import phonebookService from './services/phonebook';
+import {
+  SuccessNotification,
+  ErrorNotification,
+} from './components/Notification';
 
 const App = () => {
   const [persons, setPersons] = useState([]);
@@ -10,6 +14,8 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('');
   const [searchValue, setSearchValue] = useState('');
   const [filteredPersons, setFilteredPersons] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   useEffect(() => {
     phonebookService.getAll().then((allPersons) => {
@@ -51,6 +57,10 @@ const App = () => {
       }
     } else {
       phonebookService.add(newPerson).then((addedPerson) => {
+        setSuccessMessage(`Added ${addedPerson.name}`);
+        setTimeout(() => {
+          setSuccessMessage(null);
+        }, 2500);
         setPersons(persons.concat(addedPerson));
         setNewName('');
         setNewNumber('');
@@ -61,9 +71,21 @@ const App = () => {
   const deleteContact = ({ name, id }) => {
     const message = `Delete ${name} ?`;
     if (window.confirm(message)) {
-      phonebookService.remove(id).then((deletedPerson) => {
-        setPersons(persons.filter((person) => person.id !== deletedPerson.id));
-      });
+      phonebookService
+        .remove(id)
+        .then((deletedPerson) => {
+          setPersons(
+            persons.filter((person) => person.id !== deletedPerson.id)
+          );
+        })
+        .catch((error) => {
+          setErrorMessage(
+            `Informatin of ${name} has already been removed from server`
+          );
+          setTimeout(() => {
+            setErrorMessage(null);
+          }, 2500);
+        });
     }
   };
 
@@ -86,6 +108,8 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <SuccessNotification message={successMessage} />
+      <ErrorNotification message={errorMessage} />
       <Filter searchValue={searchValue} handleSearch={search} />
       <h2>add a new</h2>
       <Form
