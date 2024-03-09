@@ -24,22 +24,14 @@ function App() {
     setFilteredCountries(filteredResults);
   };
 
-  const showView = (country) => {
-    console.log(country);
-    return <p>From the showView function</p>;
-  };
-
-  const showCountry = (showViewFn) => {
+  const showCountry = () => {
     if (filteredCountries.length === 1) {
       return <Country country={filteredCountries[0]} />;
     } else if (filteredCountries.length > 10) {
       return <p>Too many matches, specify another filter</p>;
     } else if (filteredCountries.length > 0 && filteredCountries.length <= 10) {
       return filteredCountries.map((country) => (
-        <p key={country.ccn3}>
-          {country.name.common}
-          <button onClick={() => showViewFn(country)}>show</button>
-        </p>
+        <p key={country.ccn3}>{country.name.common}</p>
       ));
     } else return <p></p>;
   };
@@ -48,7 +40,7 @@ function App() {
       <form>
         find countries <input value={value} onChange={handleChange} />
       </form>
-      {showCountry(showView)}
+      {showCountry()}
     </div>
   );
 }
