@@ -4,8 +4,9 @@
   "description": " a blog list application, that allows users to save information about interesting blogs they have stumbled across on the internet.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.js"
+    "start": "NODE_ENV=production node index.js",
+    "dev": "NODE_ENV=development nodemon index.js",
+    "test": "NODE_ENV=test node --test"
   },
   "author": "sam-fsd",
   "license": "MIT",
@@ -13,9 +14,11 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "express-async-errors": "^3.1.1",
     "mongoose": "^8.4.0"
   },
   "devDependencies": {
-    "nodemon": "^3.1.2"
+    "nodemon": "^3.1.2",
+    "supertest": "^7.0.0"
   }
 }
