@@ -19,10 +19,13 @@ blogRouter.post('/', async (request, response) => {
   }
   const user = request.user;
 
+  if (!user) return response.status(401).json({ error: 'token invalid' });
+
   const blog = new Blog({
     url: body.url,
     title: body.title,
     author: body.author,
+    likes: body.likes,
     user: user._id,
   });
   const savedBlog = await blog.save();
@@ -39,7 +42,7 @@ blogRouter.delete('/:id', async (request, response) => {
   const user = request.user;
   const userid = user.id;
   const blog = await Blog.findById(request.params.id);
-  if (!blog) return response.status(404).json({ error: 'blog not foundE' });
+  if (!blog) return response.status(404).json({ error: 'blog not found' });
 
   if (blog.user.toString() === userid.toString()) {
     const deletedBlog = await Blog.findByIdAndDelete(blog._id);
@@ -58,6 +61,7 @@ blogRouter.patch('/:id', async (request, response) => {
     url: body.url,
     author: body.author,
     likes: body.likes,
+    user: body.user,
   };
 
   const updatedblog = await Blog.findByIdAndUpdate(request.params.id, blog, {
