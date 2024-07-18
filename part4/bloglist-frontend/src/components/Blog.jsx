@@ -19,7 +19,7 @@ const Blog = ({ blog, likeBlog, user, deleteBlog }) => {
       <button onClick={() => setVisible(!visible)}>
         {visible ? 'hide' : 'view'}
       </button>
-      <div style={expand}>
+      <div style={expand} className="moreInfoDiv">
         <p>{blog.url}</p>
         <p>
           Likes {blog.likes}{' '}
