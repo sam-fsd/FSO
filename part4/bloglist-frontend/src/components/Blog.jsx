@@ -29,7 +29,7 @@ const Blog = ({ blog, likeBlog, user, deleteBlog }) => {
         {blog.user.username === user.username ? (
           <button onClick={() => deleteBlog(blog)}>remove</button>
         ) : (
-          ''
+          'NOT OWNER OF RESOURCE'
         )}
       </div>
     </div>

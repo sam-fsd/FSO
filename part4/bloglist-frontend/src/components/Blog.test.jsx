@@ -6,6 +6,7 @@ describe('<Blog />', () => {
   let container;
   let likeBlog;
 
+  //Re-render component after cleanup(reset the virtual testing environment(jsdom))
   beforeEach(() => {
     const user = {
       name: 'testUser',
@@ -34,6 +35,7 @@ describe('<Blog />', () => {
 
   test('more info is displayed when view button is clicked', async () => {
     const element = container.querySelector('.moreInfoDiv');
+    screen.debug();
     const button = screen.getByText('view');
     const user = userEvent.setup();
 

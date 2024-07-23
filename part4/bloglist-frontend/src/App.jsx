@@ -132,6 +132,7 @@ const App = () => {
           <Input
             inputName="username"
             type="text"
+            testid="username"
             value={username}
             onChange={({ target }) => setUsername(target.value)}
           />
@@ -139,6 +140,7 @@ const App = () => {
           <Input
             inputName="password"
             type="password"
+            testid="password"
             value={password}
             onChange={({ target }) => setPassword(target.value)}
           />
