@@ -1,8 +1,10 @@
+import { TextField } from '@mui/material'
+
 const Input = ({ inputName, onChange, value, type, id, testid }) => {
   return (
     <div>
-      {inputName}
-      <input
+      <TextField
+        label={inputName}
         type={type}
         value={value}
         onChange={onChange}
@@ -10,7 +12,7 @@ const Input = ({ inputName, onChange, value, type, id, testid }) => {
         data-testid={testid}
       />
     </div>
-  );
-};
+  )
+}
 
-export default Input;
+export default Input

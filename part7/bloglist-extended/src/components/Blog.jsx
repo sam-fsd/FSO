@@ -1,10 +1,8 @@
-import { useState } from 'react'
+import Typography from '@mui/material/Typography'
+import { Box, Card } from '@mui/material'
+import { Link } from 'react-router-dom'
 
-const Blog = ({ blog, likeBlog, user, deleteBlog }) => {
-  const [visible, setVisible] = useState(false)
-
-  const expand = { display: visible ? '' : 'none' }
-
+const Blog = ({ blog }) => {
   const blogStyle = {
     paddingTop: 10,
     paddingLeft: 2,
@@ -14,28 +12,16 @@ const Blog = ({ blog, likeBlog, user, deleteBlog }) => {
   }
 
   return (
-    <div style={blogStyle}>
-      {blog.title} {blog.author}{' '}
-      <button onClick={() => setVisible(!visible)}>
-        {visible ? 'hide' : 'view'}
-      </button>
-      <div
-        style={expand}
-        className="moreInfoDiv"
-      >
-        <p>{blog.url}</p>
-        <p>
-          Likes {blog.likes}{' '}
-          <button onClick={() => likeBlog(blog)}>like</button>{' '}
-        </p>
-        <p>{blog.user.name}</p>
-        {blog.user.username === user.username ? (
-          <button onClick={() => deleteBlog(blog)}>remove</button>
-        ) : (
-          ''
-        )}
-      </div>
-    </div>
+    <Card variant="outlined">
+      <Link to={`/blogs/${blog.id}`}>
+        <Typography
+          variant="body1"
+          sx={{ p: 2 }}
+        >
+          {blog.title} {blog.author}{' '}
+        </Typography>
+      </Link>
+    </Card>
   )
 }
 

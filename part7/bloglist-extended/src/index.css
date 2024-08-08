@@ -16,3 +16,8 @@
   padding: 10px;
   margin-bottom: 10px;
 }
+
+a {
+  text-decoration: none;
+  color: rgb(7, 179, 179);
+}

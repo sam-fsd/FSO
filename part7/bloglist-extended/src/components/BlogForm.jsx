@@ -1,29 +1,35 @@
-import Input from './Input';
-import { useState } from 'react';
+import Input from './Input'
+import { useState } from 'react'
+import { Typography, Button } from '@mui/material'
 
 const BlogForm = ({ createBlog }) => {
-  const [title, setTitle] = useState('');
-  const [author, setAuthor] = useState('');
-  const [url, setUrl] = useState('');
+  const [title, setTitle] = useState('')
+  const [author, setAuthor] = useState('')
+  const [url, setUrl] = useState('')
 
   const addBlog = (event) => {
-    event.preventDefault();
+    event.preventDefault()
     createBlog({
       title,
       author,
       url,
-    });
-    setAuthor('');
-    setTitle('');
-    setUrl('');
-  };
+    })
+    setAuthor('')
+    setTitle('')
+    setUrl('')
+  }
 
   return (
     <div className="formDiv">
-      <h2>Create new</h2>
+      <Typography
+        variant="h5"
+        sx={{ mb: 1 }}
+      >
+        Create new
+      </Typography>
       <form onSubmit={addBlog}>
         <Input
-          inputName="title:"
+          inputName="Title"
           type="text"
           id="title-input"
           testid="title"
@@ -31,7 +37,7 @@ const BlogForm = ({ createBlog }) => {
           onChange={({ target }) => setTitle(target.value)}
         />
         <Input
-          inputName="author:"
+          inputName="Author"
           type="text"
           id="author-input"
           testid="author"
@@ -39,17 +45,25 @@ const BlogForm = ({ createBlog }) => {
           onChange={({ target }) => setAuthor(target.value)}
         />
         <Input
-          inputName="url:"
+          inputName="Url"
           type="text"
           id="url-input"
           testid="url"
           value={url}
           onChange={({ target }) => setUrl(target.value)}
         />
-        <button type="submit">Create</button>
+        <Button
+          sx={{ my: 1 }}
+          variant="outlined"
+          color="success"
+          size="small"
+          type="submit"
+        >
+          Create
+        </Button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default BlogForm;
+export default BlogForm
